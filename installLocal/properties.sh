@@ -1,4 +1,4 @@
-export scriptHome=/home/pablo/EntornosTrabajo/KeepCodingFinalProject/installProcess/airQuality
+export scriptHome=/user/raj_ops/installProcessDocker/airQuality
 export inputPath=$scriptHome/data/Calidad
 export stationsPath=$scriptHome/basedata/stations.csv
 export distritosNO2Path=$scriptHome/data/barrios_distritos_NO2.csv

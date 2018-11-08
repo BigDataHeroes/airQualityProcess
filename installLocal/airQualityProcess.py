@@ -18,6 +18,7 @@ import json
 from shapely.geometry import shape, Point
 import sys
 import math
+from hdfs3 import HDFileSystem
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -31,18 +32,20 @@ distritosM25Path=sys.argv[3]
 path =sys.argv[4] 
 barriosPath=sys.argv[5]
 
+hdfs = HDFileSystem(host='sandbox-hdp.hortonworks.com', port=8020)
+
 print("path:" + path)
 print("stationsPath:" + stationsPath)
 print("distritosNO2Path:" + distritosNO2Path)
 print("distritosM25Path:" + distritosM25Path)
 print("barriosPath:" + barriosPath)
 
-allFiles = glob.glob(path + "/Anio201*/*.csv")
-
-for file_ in allFiles:
-  print(file_)
-  df = pd.read_csv(file_,index_col=None, header=0, sep=';')
-  list_.append(df)
+with hdfs.open(path + "/Anio201*/*.csv") as f:
+    allFiles = glob.glob(f)
+    for file_ in allFiles:
+        print(file_)
+        df = pd.read_csv(file_,index_col=None, header=0, sep=';')
+        list_.append(df)
 frame = pd.concat(list_)
 
 frame = frame.sort_values(['ESTACION', 'MAGNITUD'])
@@ -163,7 +166,7 @@ data_estacion = data_m25[['lat','lon','amin','amax','mean', 'percentile_5', 'med
 """
 Para cada barrio, calculo la distancia a cada una de las estaciones
 """
-with open(distritosM25Path, 'w') as f:
+with hdfs.open(distritosM25Path) as f:
   f.write('"CODBAR","BARRIO","CODDIST","DISTRITO","MEAN","PERC5","MEDIA","PERC95"\n')
   for barrio in js['features']:
       
