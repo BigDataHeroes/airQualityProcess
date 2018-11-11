@@ -20,8 +20,7 @@ import sys
 import math
 from hdfs3 import HDFileSystem
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 
 frame = pd.DataFrame()
 list_ = []
@@ -32,7 +31,7 @@ distritosM25Path=sys.argv[3]
 path =sys.argv[4] 
 barriosPath=sys.argv[5]
 
-hdfs = HDFileSystem(host='sandbox-hdp.hortonworks.com', port=8020)
+hdfs = HDFileSystem(host='bdhKC', port=9000)
 
 print("path:" + path)
 print("stationsPath:" + stationsPath)
@@ -166,7 +165,7 @@ data_estacion = data_m25[['lat','lon','amin','amax','mean', 'percentile_5', 'med
 """
 Para cada barrio, calculo la distancia a cada una de las estaciones
 """
-with hdfs.open(distritosM25Path) as f:
+with hdfs.open(distritosM25Path, 'wb') as f:
   f.write('"CODBAR","BARRIO","CODDIST","DISTRITO","MEAN","PERC5","MEDIA","PERC95"\n')
   for barrio in js['features']:
       

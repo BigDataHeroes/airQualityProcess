@@ -1,7 +1,6 @@
-export scriptHome=/user/raj_ops/installProcessDocker/airQuality
-export inputPath=$scriptHome/data/Calidad
-export stationsPath=$scriptHome/basedata/stations.csv
-export distritosNO2Path=$scriptHome/data/barrios_distritos_NO2.csv
-export distritosM25Path=$scriptHome/data/barrios_distritos_m25.csv
-export barriosPath=$scriptHome/basedata/BARRIOS.geojson
+export inputPath=$scriptHome/data/airQuality/Calidad
+export stationsPath=/basedata/airQuality/stations.csv
+export distritosNO2Path=/data/airQuality/barrios_distritos_NO2.csv
+export distritosM25Path=/data/airQuality/barrios_distritos_m25.csv
+export barriosPath=/basedata/airQuality/BARRIOS.geojson
 
